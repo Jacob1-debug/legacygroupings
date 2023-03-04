@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>OAuth Tutorials</title>
+        <style>
+            body{
+                font-family: arial;
+                margin: 0;
+            }
+            nav{
+                background: #333;
+                padding: 20px 10px;
+            }
+            nav ul{
+                max-width: 960px;
+                margin: 0 auto;
+                padding: 0;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            nav li{
+                list-style-type: none;
+                display: inline-block;
+                margin: 0 10px 0 0;
+            }
+            nav a{
+                color: #fff;
+                font-size: 18px;
+                background: rgba(255,255,255,0.2);
+                text-decoration: none;
+                padding: 10px;
+                display: block;
+            }
+            nav h1 {
+                color: #fff;
+                font-size: 50px;
+                margin: 0;
+                padding: 0;
+                font-family: AllertaStencil_font;
+                text-transform: uppercase;
+            }
+            footer {
+                background: #333;
+                padding: 20px 10px;
+            }
+            footer ul{
+                max-width: 960px;
+                margin: 0 auto;
+                padding: 0;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            footer li{
+                list-style-type: none;
+                display: inline-block;
+                margin-right: 10px;
+            }
+            footer a{
+                color: #fff;
+                font-size: 18px;
+                background: rgba(255,255,255,0.2);
+                text-decoration: none;
+                padding: 10px;
+                display: block;
+            }
+            main, header{
+                max-width: 960px;
+                margin: 30px auto;
+                padding: 0 10px;
+                color: #333;
+            }
+            form {
+                max-width: 500px;
+                margin: 0 auto;
+            }
+            label {
+                display: block;
+                margin-bottom: 10px;
+            }
+            input, select {
+                width: 100%;
+                padding: 10px;
+                margin-bottom: 20px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+            }
+            button[type=submit] {
+                background-color: #4CAF50;
+                color: white;
+                padding: 12px 20px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+            button[type=submit]:hover {
+                background-color: #45a049;
+            }
+            .note {
+                margin-bottom: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <nav>
+            <h1>Minerva</h1>
+            <ul>
+                <% if (user) { %>
+                <li><a href="/auth/logout">Log out</a></li>
+                <% } else { %>
+                <li><a href="/auth/login">Login</a></li>
+                <% } %>
+                <li><a href="/">Homepage</a></li>
+                <li><a href="/profile">Profile</a></li>
+            </ul>
+        </nav>
+        <header>
+            <h2>Please fill this form</h2>
+            <p class="note">We need your information to personalize your experience and provide better service.</p>
+        </header>
+        <main>
+            <form>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+        
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" required>
+        
+                <label for="high-school">High School:</label>
+                <input type="text" id="high-school" name="high-school" required>
+        
+                <label for="hobbies">Hobbies:</label>
+                <input type="text" id="hobbies" name="hobbies" required>
+        
+                <label for="country">Country:</label>
+                <select id="country" name="country">
+                    <option value="">Select a country</option>
+                    <!-- Using an API to populate the country list -->
+                    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+                    <script>
+                        axios.get('https://restcountries.com/v2/all')
+                            .then(function(response) {
+                                var countries = response.data;
+                                var countrySelect = document.getElementById("country");
+                                countries.forEach(function(country) {
+                                    var option = document.createElement("option");
+                                    option.value = country.alpha2Code;
+                                    option.text = country.name;
+                                    countrySelect.appendChild(option);
+                                });
+                            })
+                            .catch(function(error) {
+                                console.log(error);
+                            });
+                    </script>
+                </select>
+        
+                <input type="submit" value="Submit">
+            </form>
+        
+            <div class="section-container">
+                <%- include('section') %>
+            </div>
+            
+        </br> </br> </br> </br>
+
+            </main>
+            </main>
+
+            </body>
+            <footer>
+                <ul>
+                    <li><a href="<https://www.google.com/search?q=facebook+main+page&oq=facebook+main+pa&aqs=chrome.1.69i57j0i512l3j0i22i30l3j0i22i30i625l3.13228j0j7&sourceid=chrome&ie=UTF-8#:~:text=Facebook%20%2D%20log%20in,www.facebook.com>">Facebook</a></li>
+                    <li><a href="<https://www.instagram.com/>">Instagram</a></li>
+                    <li><a href="<https://www.minerva.edu/>">Our website</a></li>
+                </ul>
+                <p>Copyright © 2022. All rights reserved.</p>
+                <p>Contact us at contact@example.com</p>
+            </footer>
+
+            
+        </main>
+        
+        <script>
+            // Set the input widths dynamically based on the length of the label text
+            var labels = document.getElementsByTagName('label');
+            for (var i = 0; i < labels.length; i++) {
+                var label = labels[i];
+                var input = document.getElementById(label.getAttribute('for'));
+                var width = label.offsetWidth;
+                input.style.width = width + "px";
+            }
+    
+            // When the form is submitted, send the data to the server
+            var form = document.querySelector('form');
+            form.addEventListener('submit', function(event) {
+                event.preventDefault(); // prevent the form from submitting normally
+    
+                // Get the form data
+                var formData = new FormData(form);
+                var data = {};
+                formData.forEach(function(value, key) {
+                    data[key] = value;
+                });
+    
+                // Send the data to the server using AJAX
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', '/submit-form');
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+                            // Success!
+                            console.log(xhr.responseText);
+                        } else {
+                            // Error :(
+                            console.error(xhr.statusText);
+                        }
+                    }
+                };
+                xhr.send(JSON.stringify(data));
+            });
+        </script>
+    </body>
+    
