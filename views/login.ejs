@@ -1,87 +1,105 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Login</title>
-        <style>
-            body{
-                font-family: arial;
-                margin: 0;
-            }
-            nav{
-                background: #333;
-                padding: 20px 10px;
-            }
-            nav h1 {
-                color: #fff;
-                font-size: 50px;
-                margin: 0;
-                padding: 0;
-                font-family: AllertaStencil_font;
-                text-transform: uppercase;
-            }
-            nav ul{
-                max-width: 960px;
-                margin: 0 auto;
-                padding: 0;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-            }
-            nav li{
-                list-style-type: none;
-                display: inline-block;
-                margin: 0 10px 0 0;
-            }
-            nav a{
-                color: #fff;
-                font-size: 18px;
-                background: rgba(255,255,255,0.2);
-                text-decoration: none;
-                padding: 10px;
-                display: block;
-            }
-            nav h1 {
-                color: #fff;
-                font-size: 50px;
-                margin: 0;
-                padding: 0;
-                font-family: AllertaStencil_font;
-                text-transform: uppercase;
-            }
-            main, header{
-                max-width: 960px;
-                margin: 30px auto;
-                padding: 0 10px;
-                color: #333;
-            }
-            .google-btn{
-                color: #fff;
-                text-decoration: none;
-                font-size: 18px;
-                padding: 10px;
-                background: #333;
-            }
-        </style>
-    </head>
-    <body>
-        <nav>
-            <h1>Minerva</h1>
-            <ul>
-                <% if (user) { %>
-                <li><a href="/auth/logout">Log out</a></li>
-                <% } else { %>
-                <li><a href="/auth/login">Login</a></li>
-                <% } %>
-                <li><a href="/">Homepage</a></li>
-                <li><a href="/profile">Profile</a></li>
-            </ul>
-        </nav>
-        <header>
-            <h1>Login using...</h1>
-        </header>
-        <main>
-            <a class="google-btn" href="/auth/google">Google+</a>
-        </main>
-    </body>
-</html>
+<head>
+    <meta charset="utf-8">
+    <title>Login</title>
+    <style>
+        /* Styling for the page */
+        body{
+            font-family: arial;
+            margin: 0;
+        }
+        nav{
+            background: #333;
+            padding: 20px 10px;
+        }
+        nav h1 {
+            color: #fff;
+            font-size: 50px;
+            margin: 0;
+            padding: 0;
+            font-family: AllertaStencil_font;
+            text-transform: uppercase;
+        }
+        nav ul{
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav li{
+    list-style-type: none;
+    display: inline-block;
+    flex: 1;
+    margin-right: 0;
+    text-align: center;
+    
+}
+        nav a{
+            color: #fff;
+            font-size: 18px;
+            background: rgba(255,255,255,0.2);
+            text-decoration: none;
+            padding: 10px;
+            display: block;
+        }
+        main, header{
+            max-width: 960px;
+            margin: 30px auto;
+            padding: 0 10px;
+            color: #333;
+        }
+        .google-btn{
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            padding: 10px;
+            background: #333;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation bar -->
+    <nav>
+        <h1>Minerva</h1>
+        <ul>
+            <% if (user) { %>
+            <li><a href="/auth/logout">Log out</a></li>
+            <% } else { %>
+            <li><a href="/auth/login">Login</a></li>
+            <% } %>
+            <li><a href="/">Homepage</a></li>
+            <li><a href="/profile">Profile</a></li>
+        </ul>
+    </nav>
+    
+    <!-- Header section -->
+    <header>
+        <h1>Login using...</h1>
+    </header>
+    
+    <!-- Main content section -->
+    <main>
+        <!-- Login form -->
+        <form method="post" action="/auth/login">
+            <h2>Login</h2>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit">Login</button>
+        </form>
+        
+        <!-- Registration form -->
+        <!-- <form method="post" action="/auth/register">
+            <h2>Register</h2>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit">Register</button>
+        </form> -->
+        
+        <!-- Google login button -->
+        <!-- <a class="google-btn" href="/auth/google">Google+</a> -->
