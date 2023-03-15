@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<body></body><!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
@@ -154,70 +154,7 @@
             }
         </style>
     </head>
-    <body>
-        <nav>
-            <h1>Minerva</h1>
-            <ul>
-                <% if (user) { %>
-                <li><a href="/auth/logout">Log out</a></li>
-                <% } else { %>
-                <li><a href="/auth/login">Login</a></li>
-                <% } %>
-                <li><a href="/">Homepage</a></li>
-                <!-- <li><a href="/quizes">Quizes</a></li> -->
-                
-            </ul>
-        </nav>
-        <header>
-            <h2>Please fill this form</h2>
-            <p class="note">We need your information to personalize your experience and provide better service.</p>
-        </header>
-        <main>
-            <form>
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required>
-        
-                <label for="age">Age:</label>
-                <input type="number" id="age" name="age" required>
-        
-                <label for="high-school">High School:</label>
-                <input type="text" id="high-school" name="high-school" required>
-        
-                <label for="hobbies">Hobbies:</label>
-                <input type="text" id="hobbies" name="hobbies" required>
-        
-                <label for="country">Country:</label>
-                <select id="country" name="country">
-                    <option value="">Select a country</option>
-                    <!-- Using an API to populate the country list -->
-                    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-                    <script>
-                        axios.get('https://restcountries.com/v2/all')
-                            .then(function(response) {
-                                var countries = response.data;
-                                var countrySelect = document.getElementById("country");
-                                countries.forEach(function(country) {
-                                    var option = document.createElement("option");
-                                    option.value = country.alpha2Code;
-                                    option.text = country.name;
-                                    countrySelect.appendChild(option);
-                                });
-                            })
-                            .catch(function(error) {
-                                console.log(error);
-                            });
-                    </script>
-                </select>
-        
-                <button type="button" onclick="location.href='./section';">Next</button>
-        
-            </form>
-        </main>
-        
-          
-           
-
-            <body>
+   
             <footer>
                 <div class="container">
                   <div class="row">
@@ -267,45 +204,6 @@
             
         
         
-        <script>
-            // Set the input widths dynamically based on the length of the label text
-            var labels = document.getElementsByTagName('label');
-            for (var i = 0; i < labels.length; i++) {
-                var label = labels[i];
-                var input = document.getElementById(label.getAttribute('for'));
-                var width = label.offsetWidth;
-                input.style.width = width + "px";
-            }
-    
-            // When the form is submitted, send the data to the server
-            var form = document.querySelector('form');
-            form.addEventListener('submit', function(event) {
-                event.preventDefault(); // prevent the form from submitting normally
-    
-                // Get the form data
-                var formData = new FormData(form);
-                var data = {};
-                formData.forEach(function(value, key) {
-                    data[key] = value;
-                });
-    
-                // Send the data to the server using AJAX
-                var xhr = new XMLHttpRequest();
-                xhr.openUri('POST', '/submit-form');
-                xhr.setRequestHeader('Content-Type', 'application/json');
-                xhr.onreadystatechange = function() {
-                    if (xhr.readyState === 4) {
-                        if (xhr.status === 200) {
-                            // Success!
-                            console.log(xhr.responseText);
-                        } else {
-                            // Error :(
-                            console.error(xhr.statusText);
-                        }
-                    }
-                };
-                xhr.send(JSON.stringify(data));
-            });
-        </script>
+       
     </body>
     

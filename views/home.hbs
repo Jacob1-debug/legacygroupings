@@ -164,8 +164,8 @@
                 <li><a href="/auth/login">Login</a></li>
                 <% } %>
                 <li><a href="/">Homepage</a></li>
-                <!-- <li><a href="/quizes">Quizes</a></li> -->
-                
+                <li><a href="/quizes">Quizes</a></li>
+                <li><a href="/profile">Profile</a></li>
             </ul>
         </nav>
         <header>
@@ -174,50 +174,80 @@
         </header>
         <main>
             <form>
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required>
-        
-                <label for="age">Age:</label>
-                <input type="number" id="age" name="age" required>
-        
-                <label for="high-school">High School:</label>
-                <input type="text" id="high-school" name="high-school" required>
-        
-                <label for="hobbies">Hobbies:</label>
-                <input type="text" id="hobbies" name="hobbies" required>
-        
-                <label for="country">Country:</label>
-                <select id="country" name="country">
-                    <option value="">Select a country</option>
-                    <!-- Using an API to populate the country list -->
-                    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-                    <script>
-                        axios.get('https://restcountries.com/v2/all')
-                            .then(function(response) {
-                                var countries = response.data;
-                                var countrySelect = document.getElementById("country");
-                                countries.forEach(function(country) {
-                                    var option = document.createElement("option");
-                                    option.value = country.alpha2Code;
-                                    option.text = country.name;
-                                    countrySelect.appendChild(option);
-                                });
-                            })
-                            .catch(function(error) {
-                                console.log(error);
-                            });
-                    </script>
-                </select>
-        
-                <button type="button" onclick="location.href='./section';">Next</button>
-        
-            </form>
-        </main>
-        
+              <label for="name">Name:</label>
+              <input type="text" id="name" name="name" required>
           
-           
+              <label for="age">Age:</label>
+              <input type="number" id="age" name="age" required>
+          
+              <label for="high-school">High School:</label>
+              <input type="text" id="high-school" name="high-school" required>
+          
+              <label for="hobbies">Hobbies:</label>
+              <input type="text" id="hobbies" name="hobbies" required>
+          
+              <label for="country">Country:</label>
+              <select id="country" name="country">
+                <option value="">Select a country</option>
+                <!-- Using an API to populate the country list -->
+                <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+                <script>
+                  axios.get('https://restcountries.com/v2/all')
+                    .then(function(response) {
+                      var countries = response.data;
+                      var countrySelect = document.getElementById("country");
+                      countries.forEach(function(country) {
+                        var option = document.createElement("option");
+                        option.value = country.alpha2Code;
+                        option.text = country.name;
+                        countrySelect.appendChild(option);
+                      });
+                    })
+                    .catch(function(error) {
+                      console.log(error);
+                    });
+                </script>
+              </select>
+          
+              <input type="button" value="Next" onclick="nextPage()">
+          
+              <div class="section-container">
+                <% include('section') %>
+              </div>
+          
+            </form>
+          
+            <script>
+              function nextPage() {
+                document.querySelector('.section-container').innerHTML = `
+                <h2>Additional Questions</h2>
+                <label for="occupation">Occupation:</label>
+                <input type="text" id="occupation" name="occupation" required>
+          
+                <label for="gender">Gender:</label>
+                <input type="radio" id="male" name="gender" value="male">
+                <label for="male">Male</label>
+                <input type="radio" id="female" name="gender" value="female">
+                <label for="female">Female</label>
+                <input type="radio" id="other" name="gender" value="other">
+                <label for="other">Other</label>
+          
+                <label for="food">Favorite Food:</label>
+                <select id="food" name="food">
+                  <option value="">Select a food</option>
+                  <option value="pizza">Pizza</option>
+                  <option value="burger">Burger</option>
+                  <option value="sushi">Sushi</option>
+                </select>
+                `;
+              }
+            </script>
+          
+          </main>
+          
+            </main>
 
-            <body>
+            </body>
             <footer>
                 <div class="container">
                   <div class="row">
@@ -265,7 +295,7 @@
               </footer>
 
             
-        
+        </main>
         
         <script>
             // Set the input widths dynamically based on the length of the label text
